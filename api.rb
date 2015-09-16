@@ -36,14 +36,18 @@ module API
       end
       get '/metadata' do
         {
-          columns: [
-            {id: "ID",              type: 'numeric'},
-            {first_name: 'Имя',     type: 'string',   enableFiltering:true,  enableSorting:true},
-            {last_name: 'Фамилия',  type: 'string',   enableFiltering:true,  enableSorting:true},
-            {email: 'Email',        type: 'string',   enableFiltering:true,  enableSorting:true},
-            {created_at: Time.now,  type: 'datetime', enableSorting:true},
-            {gender: 'Пол', type: 'string', visible:false}
-          ]
+          gridOptions: {
+            enableSorting: true,
+            enableFiltering: true,
+            columnDefs: [
+              {name: "ID",          displayName: 'Id',          type: 'numeric'},
+              {name: 'first_name',  displayName: 'Имя',         type: 'string',   enableFiltering:true,  enableSorting:true},
+              {name: 'last_name',   displayName: 'Фамилия',     type: 'string',   enableFiltering:true,  enableSorting:true},
+              {name: 'email',       displayName: 'Email',       type: 'string',   enableFiltering:true,  enableSorting:true},
+              {name: 'created_at',  displayName: 'Дата регистрации', type: 'datetime', enableSorting:true},
+              {name: 'gender',      displayName: 'Пол', type: 'string', visible:false}
+            ]
+          }
         }
       end
     end
