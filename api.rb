@@ -32,24 +32,18 @@ module API
       end
 
       get do
-        {id: 1, first_name: 'FirstName', last_name:'LastName', email: 'test@mail.ru', created_at: Time.now}
+        {id: 1, first_name: 'FirstName', last_name:'LastName', email: 'test@mail.ru', created_at: Time.now, gender: 'male'}
       end
       get '/metadata' do
         {
-          columns: {
-            id: "ID",
-            first_name: 'Имя',
-            last_name: 'Фамилия',
-            email: 'Email',
-            created_at: Time.now
-          },
-          pagination: true,
-          filters: [:first_name, :last_name, :email],
-          sorting: {
-            default: {column: :created_at, order: :desc},
-            column: [:first_name, :last_name, :email, :created_at],
-            order: [:asc, :desc]
-          }
+          columns: [
+            {id: "ID",              type: 'numeric'},
+            {first_name: 'Имя',     type: 'string',   enableFiltering:true,  enableSorting:true},
+            {last_name: 'Фамилия',  type: 'string',   enableFiltering:true,  enableSorting:true},
+            {email: 'Email',        type: 'string',   enableFiltering:true,  enableSorting:true},
+            {created_at: Time.now,  type: 'datetime', enableSorting:true},
+            {gender: 'Пол', type: 'string', visible:false}
+          ]
         }
       end
     end
